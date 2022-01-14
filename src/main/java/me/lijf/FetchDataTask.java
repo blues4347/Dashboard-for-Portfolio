@@ -16,6 +16,5 @@ public class FetchDataTask extends TimerTask {
     public void run() {
         PriceData data=this.service.refresh();
         this.view.refresh(data);
-        System.out.println(new Date());
     }
 }

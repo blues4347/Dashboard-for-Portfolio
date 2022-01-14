@@ -10,7 +10,12 @@ import java.io.IOException;
 import java.util.Date;
 
 public class FetchDataService {
-    String favourites="sz300750";
+    String favourites;
+
+    public FetchDataService(String favourites) {
+        this.favourites = favourites;
+    }
+
     public PriceData refresh(){
         CloseableHttpClient client= HttpClients.createDefault();
         try{
@@ -33,11 +38,11 @@ public class FetchDataService {
     private PriceData result(String text){
         text=text.substring(text.indexOf(favourites)+favourites.length()+2).replace("\";","");
         String[] data=text.split(",");
-        return new PriceData(data[0],data[3],data[5],data[4],data[31]);
+        return new PriceData(data[0],data[2],data[3],data[4],data[5],data[31]);
     }
 
     private PriceData error(){
-        PriceData ret=new PriceData("error","error","error","error",new Date().toLocaleString());
+        PriceData ret=new PriceData("error","error","error","error","error",new Date().toLocaleString());
         return ret;
     }
 }

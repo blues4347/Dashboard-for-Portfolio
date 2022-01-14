@@ -6,11 +6,10 @@ import java.util.Timer;
 public class Application {
     public static void main(String[] args){
         Dashboard view=new Dashboard();
-        FetchDataService service=new FetchDataService();
 
-        FetchDataTask task=new FetchDataTask(service,view);
+        FetchDataTask task=new FetchDataTask(new FetchDataService("sz300750"),view);
         Timer timer=new Timer();
-        timer.schedule(task,0,60000);
+        timer.schedule(task,0,10000);
 
         JFrame frame =new JFrame("Desktop");
         frame.setContentPane(view.getDesktop());
