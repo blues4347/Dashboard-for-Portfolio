@@ -1,20 +1,23 @@
 package me.lijf;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TimerTask;
 
 public class FetchDataTask extends TimerTask {
     FetchDataService service;
-    Dashboard view;
+    ArrayList<Dashboard> views;
 
-    public FetchDataTask(FetchDataService service, Dashboard view) {
+    public FetchDataTask(FetchDataService service, ArrayList<Dashboard> views) {
         this.service = service;
-        this.view = view;
+        this.views = views;
     }
 
     @Override
     public void run() {
-        PriceData data=this.service.refresh();
-        this.view.refresh(data);
+        List<PriceData> data=this.service.refresh();
+        for(int i=0;i<data.size();i++){
+            this.views.get(i).refresh(data.get(i));
+        }
     }
 }

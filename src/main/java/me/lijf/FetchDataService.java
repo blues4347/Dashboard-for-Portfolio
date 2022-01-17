@@ -7,7 +7,9 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class FetchDataService {
     String favourites;
@@ -16,7 +18,9 @@ public class FetchDataService {
         this.favourites = favourites;
     }
 
-    public PriceData refresh(){
+    public List<PriceData> refresh(){
+        ArrayList<PriceData> data=new ArrayList<>();
+
         CloseableHttpClient client= HttpClients.createDefault();
         try{
             HttpGet httpGet=new HttpGet("http://hq.sinajs.cn/list="+favourites);
@@ -35,14 +39,23 @@ public class FetchDataService {
         return error();
     }
 
-    private PriceData result(String text){
-        text=text.substring(text.indexOf(favourites)+favourites.length()+2).replace("\";","");
-        String[] data=text.split(",");
-        return new PriceData(data[0],data[2],data[3],data[4],data[5],data[31]);
+    private List<PriceData> result(String text){
+        String[] lines=text.split(";\\n");
+        List<PriceData> ret = new ArrayList<>();
+
+        for(String line:lines) {
+            line = line.substring(text.indexOf("=\"") + 2).replace("\";", "");
+            String[] data = line.split(",");
+            PriceData priceData = new PriceData(data[0], data[2], data[3], data[4], data[5], data[31]);
+            ret.add(priceData);
+        }
+        return ret;
     }
 
-    private PriceData error(){
-        PriceData ret=new PriceData("error","error","error","error","error",new Date().toLocaleString());
+    private List<PriceData> error(){
+        PriceData error=new PriceData("error","error","error","error","error",new Date().toLocaleString());
+        List<PriceData> ret=new ArrayList<>();
+        ret.add(error);
         return ret;
     }
 }

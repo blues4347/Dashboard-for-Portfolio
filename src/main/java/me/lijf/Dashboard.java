@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class Dashboard {
     private Font font=new Font("微软雅黑",Font.PLAIN,16);
-    private JPanel desktop=new JPanel();
+    private JPanel desktop;
 
     private JLabel sid=new JLabel("Loading..");
     private JLabel price=new JLabel("0.00");
@@ -18,26 +18,20 @@ public class Dashboard {
 
     public Dashboard() {
         this.desktop=new JPanel();
-        this.desktop.setSize(150,200);
+        this.desktop.setBackground(Color.BLACK);
         this.desktop.setLayout(new GridLayout(7,1));
-        this.desktop.add(this.sid);
-        this.desktop.add(this.stamp);
-        this.desktop.add(this.price);
-        this.desktop.add(this.pcnt);
-        this.desktop.add(this.hi);
-        this.desktop.add(this.low);
-        this.desktop.add(this.local);
-        this.sid.setFont(font);
-        this.sid.setHorizontalAlignment(SwingConstants.RIGHT);
-        this.local.setHorizontalAlignment(SwingConstants.RIGHT);
-        this.price.setFont(font);
-        this.price.setHorizontalAlignment(SwingConstants.RIGHT);
-        this.pcnt.setFont(font);
-        this.pcnt.setHorizontalAlignment(SwingConstants.RIGHT);
-        this.hi.setHorizontalAlignment(SwingConstants.RIGHT);
-        this.low.setHorizontalAlignment(SwingConstants.RIGHT);
-        this.stamp.setHorizontalAlignment(SwingConstants.RIGHT);
+        this.desktop.add(this.sid);style(this.sid);this.sid.setFont(font);
+        this.desktop.add(this.stamp);style(this.stamp);
+        this.desktop.add(this.price);style(this.price);this.price.setFont(font);
+        this.desktop.add(this.pcnt);style(this.pcnt);this.pcnt.setFont(font);
+        this.desktop.add(this.hi);style(this.hi);
+        this.desktop.add(this.low);style(this.low);
+        this.desktop.add(this.local);style(this.local);
+    }
 
+    private void style(JLabel label){
+        label.setForeground(new Color(150,150,150));
+        label.setHorizontalAlignment(SwingConstants.RIGHT);
     }
 
     public void refresh(PriceData data){
