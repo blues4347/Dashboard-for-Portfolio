@@ -18,9 +18,9 @@ public class Dashboard {
 
     public Dashboard() {
         this.desktop=new JPanel();
-        this.desktop.setBackground(Color.BLACK);
+        this.desktop.setBackground(new Color(20,20,20));
         this.desktop.setLayout(new GridLayout(7,1));
-        this.desktop.add(this.sid);style(this.sid);this.sid.setFont(font);
+        this.desktop.add(this.sid);style(this.sid);
         this.desktop.add(this.stamp);style(this.stamp);
         this.desktop.add(this.price);style(this.price);this.price.setFont(font);
         this.desktop.add(this.pcnt);style(this.pcnt);this.pcnt.setFont(font);
@@ -30,7 +30,7 @@ public class Dashboard {
     }
 
     private void style(JLabel label){
-        label.setForeground(new Color(150,150,150));
+        label.setForeground(new Color(100,100,100));
         label.setHorizontalAlignment(SwingConstants.RIGHT);
     }
 

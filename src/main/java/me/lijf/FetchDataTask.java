@@ -1,5 +1,8 @@
 package me.lijf;
 
+import me.lijf.service.FetchDataService;
+import me.lijf.service.FetchDataServiceFromSina;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
