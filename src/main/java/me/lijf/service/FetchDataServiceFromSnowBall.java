@@ -12,9 +12,7 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class FetchDataServiceFromSnowBall implements FetchDataService{
     String favourites;
@@ -54,7 +52,7 @@ public class FetchDataServiceFromSnowBall implements FetchDataService{
             Date timestamp=new Date(item.getLong("timestamp"));
             SimpleDateFormat sdf=new SimpleDateFormat("HH:mm:ss");
             ret.add(new PriceData(
-                    item.getString("symbol"),item.getString("last_close"),item.getString("current"),
+                    directory.get(item.getString("symbol")),item.getString("last_close"),item.getString("current"),
                     item.getString("high"),item.getString("low"),sdf.format(timestamp)));
         }
         return ret;
@@ -66,4 +64,11 @@ public class FetchDataServiceFromSnowBall implements FetchDataService{
         ret.add(error);
         return ret;
     }
+
+    private static Map<String,String> directory=new LinkedHashMap(){{
+        put("SZ300750","宁德时代");
+        put("SZ300315","掌趣科技");
+        put("SZ300676","华大基因");
+        put("SZ000858","五粮液");
+    }};
 }

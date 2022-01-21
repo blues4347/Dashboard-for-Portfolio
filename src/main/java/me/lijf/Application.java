@@ -18,6 +18,7 @@ public class Application {
         JFrame frame =new JFrame("Desktop");
         JPanel desktop = new JPanel();
         desktop.setBackground(new Color(20,20,20));
+        desktop.setLayout(new GridLayout(1,4));
         for(int i=0;i<portfolio.length;i++){
             Dashboard view=new Dashboard();
             desktop.add(view.getDesktop());
@@ -32,6 +33,7 @@ public class Application {
         frame.setContentPane(desktop);
         //frame.setAlwaysOnTop(true);
         frame.setLocation(1050,550);
+        frame.setSize(150,100);
         frame.setUndecorated(true);
         frame.pack();
         frame.setVisible(true);
